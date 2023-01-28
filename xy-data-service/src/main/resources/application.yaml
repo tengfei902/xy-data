@@ -1,0 +1,34 @@
+server:
+  port: 8080
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.xy.data.api
+  provider:
+    timeout: 15000
+spring:
+  application:
+    name: xy-data-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/xy-cs-data?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    config:
+      discovery:
+        service-id: xy-data-service
+        enabled: on
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.xy.data.service.*.model.po
+  mapper-default-scope: com.xy.data.dao
+
+
+dubbo.server.version: 1.0.0
